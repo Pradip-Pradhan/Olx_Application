@@ -1,0 +1,1 @@
+insert into advertise_Details values(2,"book","xxx","success of life","xxx",2000,"OPEN","reading","anand");
