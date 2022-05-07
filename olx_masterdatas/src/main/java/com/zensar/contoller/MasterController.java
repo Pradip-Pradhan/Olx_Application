@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zensar.entity.OlxCategory;
 import com.zensar.entity.OlxStatus;
+import com.zensar.entitydto.OlxCategoryDto;
+import com.zensar.entitydto.OlxStatusDto;
 import com.zensar.service.MasterServiceImpl;
 
 @RestController
@@ -18,12 +20,12 @@ public class MasterController {
 	private MasterServiceImpl masterServiceImpl;
 	
 	@GetMapping("/category")
-	public List<OlxCategory> getAllCategorys(){
+	public List<OlxCategoryDto> getAllCategorys(){
 		return masterServiceImpl.getAllCategorys();
 	}
 	
 	@GetMapping("/status")
-	public List<OlxStatus> getOlxStatus(){
+	public List<OlxStatusDto> getOlxStatus(){
 		return masterServiceImpl.getAllStatus();
 	}
 
