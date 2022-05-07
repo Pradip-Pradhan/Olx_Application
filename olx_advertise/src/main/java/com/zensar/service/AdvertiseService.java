@@ -4,15 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import com.zensar.entity.AdvertiseDetails;
+import com.zensar.entitydto.AdvertiseDetailsDto;
 
 public interface AdvertiseService {
 
-	AdvertiseDetails createAdvertise(AdvertiseDetails newAdvertise);
-	AdvertiseDetails updateAdvertise(int id, AdvertiseDetails info);
-	List<AdvertiseDetails> getAllAdvertise();
-	Optional<AdvertiseDetails> getAdvertiseById(int postId);
+	AdvertiseDetailsDto createAdvertise(AdvertiseDetailsDto newAdvertise);
+	AdvertiseDetailsDto updateAdvertise(int id, AdvertiseDetailsDto info);
+	List<AdvertiseDetailsDto> getAllAdvertise();
+	AdvertiseDetailsDto getAdvertiseById(int postId);
 	boolean deleteAdvertise(int postId);
-	List<AdvertiseDetails> filterAdvertise();
-	List<AdvertiseDetails> searchedAdvertise();
-	Optional<AdvertiseDetails> getAdvertise(int postId);
+	List<AdvertiseDetailsDto> filterAdvertise();
+	List<AdvertiseDetailsDto> searchedAdvertise();
+	AdvertiseDetailsDto getAdvertise(int postId);
 }

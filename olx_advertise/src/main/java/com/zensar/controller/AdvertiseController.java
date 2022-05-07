@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zensar.entity.AdvertiseDetails;
+import com.zensar.entitydto.AdvertiseDetailsDto;
 import com.zensar.service.AdvertiseService;
 
 @RestController
@@ -23,23 +24,23 @@ public class AdvertiseController {
 	private AdvertiseService advertiseService;
 
 	@PostMapping("/advertise")
-	public ResponseEntity<AdvertiseDetails> createAdvertise(@RequestBody AdvertiseDetails newAdvertise) {
-		AdvertiseDetails newOne=advertiseService.createAdvertise(newAdvertise);
-		return new ResponseEntity<AdvertiseDetails>(newOne,HttpStatus.CREATED);
+	public ResponseEntity<AdvertiseDetailsDto> createAdvertise(@RequestBody AdvertiseDetailsDto newAdvertise) {
+		AdvertiseDetailsDto newOne=advertiseService.createAdvertise(newAdvertise);
+		return new ResponseEntity<AdvertiseDetailsDto>(newOne,HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/advertise/{id}")
-	public AdvertiseDetails updateAdvertise(@PathVariable int id, @RequestBody AdvertiseDetails info) {
+	public AdvertiseDetailsDto updateAdvertise(@PathVariable int id, @RequestBody AdvertiseDetailsDto info) {
 		return advertiseService.updateAdvertise(id, info);
 	}
 	
 	@GetMapping("/user/advertise")
-	public List<AdvertiseDetails> getAllAdvertise(){
+	public List<AdvertiseDetailsDto> getAllAdvertise(){
 		return advertiseService.getAllAdvertise();
 	}
 	
 	@GetMapping("/user/advertise/{postId}")
-	public Optional<AdvertiseDetails> getAdvertiseById(@PathVariable int postId){
+	public AdvertiseDetailsDto getAdvertiseById(@PathVariable int postId){
 		return advertiseService.getAdvertiseById(postId);
 	}
 	
@@ -49,17 +50,17 @@ public class AdvertiseController {
 	}
 	
 	@GetMapping("/advertise/search/filtercriteria")
-	public List<AdvertiseDetails> filterAdvertise(){
+	public List<AdvertiseDetailsDto> filterAdvertise(){
 		return advertiseService.filterAdvertise();
 	}
 	
 	@GetMapping("/advertise/search")
-	public List<AdvertiseDetails> searchedAdvertise(){
+	public List<AdvertiseDetailsDto> searchedAdvertise(){
 		return advertiseService.searchedAdvertise();
 	}
 	
 	@GetMapping("/advertise/{postId}")
-	public Optional<AdvertiseDetails> getAdvertise(@PathVariable int postId){
+	public AdvertiseDetailsDto getAdvertise(@PathVariable int postId){
 		return advertiseService.getAdvertise(postId);
 	}
 }
