@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zensar.entity.UserLogin;
+import com.zensar.entitydto.UserLoginDto;
 import com.zensar.service.LoginService;
 
 @RestController
@@ -43,13 +44,13 @@ public class Logincontroller {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UserLogin> createUser(@RequestBody UserLogin user) {
-		UserLogin newUser=loginService.createUser(user);
-		return new ResponseEntity<UserLogin>(newUser, HttpStatus.CREATED);
+	public ResponseEntity<UserLoginDto> createUser(@RequestBody UserLoginDto user) {
+		UserLoginDto newUser=loginService.createUser(user);
+		return new ResponseEntity<UserLoginDto>(newUser, HttpStatus.CREATED);
 	}
 	
 	@GetMapping
-	public List<UserLogin> getAllUsers() {
+	public List<UserLoginDto> getAllUsers() {
 		return loginService.getAllUsers();
 	}
 

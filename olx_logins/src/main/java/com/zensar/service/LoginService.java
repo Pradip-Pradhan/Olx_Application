@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.zensar.entity.UserLogin;
+import com.zensar.entitydto.UserLoginDto;
 
 public interface LoginService {
 
-	UserLogin createUser(UserLogin user);
-	List<UserLogin> getAllUsers();
+	UserLoginDto createUser(UserLoginDto user);
+	List<UserLoginDto> getAllUsers();
 }
