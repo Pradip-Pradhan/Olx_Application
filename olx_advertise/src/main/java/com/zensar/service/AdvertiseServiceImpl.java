@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.zensar.entity.AdvertiseDetails;
 import com.zensar.entitydto.AdvertiseDetailsDto;
+import com.zensar.exception.UserNotFound;
 import com.zensar.repository.AdvertiseRepository;
 
 @Service
@@ -29,7 +30,7 @@ public class AdvertiseServiceImpl implements AdvertiseService {
 	}
 
 	@Override
-	public AdvertiseDetailsDto updateAdvertise(int id, AdvertiseDetailsDto info) {
+	public AdvertiseDetailsDto updateAdvertise(int id, AdvertiseDetailsDto info) throws UserNotFound {
 		AdvertiseDetailsDto adResponse= getAdvertise(id);
 		AdvertiseDetails info2=modelMapper.map(adResponse, AdvertiseDetails.class);
 		if(info2 != null) {
@@ -62,24 +63,25 @@ public class AdvertiseServiceImpl implements AdvertiseService {
 	}
 
 	@Override
-	public AdvertiseDetailsDto getAdvertiseById(int postId) {
+	public AdvertiseDetailsDto getAdvertiseById(int postId) throws UserNotFound {
 		Optional<AdvertiseDetails> getIdAd=advertiseRepository.findById(postId);
 		AdvertiseDetails advertiseDetails=null;
 		if(getIdAd.isPresent()) {
 			advertiseDetails=getIdAd.get();
 			return modelMapper.map(advertiseDetails, AdvertiseDetailsDto.class);
 		}else {
-			return null;
+			throw new UserNotFound("Advertise not found with ID you provided");
 		}
 	}
 
 	@Override
-	public boolean deleteAdvertise(int postId) {
-		if(advertiseRepository.existsById(postId)) {
+	public boolean deleteAdvertiseById(int postId) throws UserNotFound {
+		AdvertiseDetails ad=advertiseRepository.getById(postId);
+		if(ad!=null) {
 			advertiseRepository.deleteById(postId);
 			return true;
 		}else {
-			return false;
+			throw new UserNotFound("Advertise not found with ID you provided");
 		}
 		
 	}
@@ -107,14 +109,14 @@ public class AdvertiseServiceImpl implements AdvertiseService {
 	}
 
 	@Override
-	public AdvertiseDetailsDto getAdvertise(int postId) {
+	public AdvertiseDetailsDto getAdvertise(int postId) throws UserNotFound {
 		Optional<AdvertiseDetails> getIdAd=advertiseRepository.findById(postId);
 		AdvertiseDetails advertiseDetails=null;
 		if(getIdAd.isPresent()) {
 			advertiseDetails=getIdAd.get();
 			return modelMapper.map(advertiseDetails, AdvertiseDetailsDto.class);
 		}else {
-			return null;
+			throw new UserNotFound("Advertise not found with ID you provided");
 		}
 	}
 

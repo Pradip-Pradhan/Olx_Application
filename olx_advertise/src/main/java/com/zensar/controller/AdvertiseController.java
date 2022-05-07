@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zensar.entity.AdvertiseDetails;
 import com.zensar.entitydto.AdvertiseDetailsDto;
+import com.zensar.exception.UserNotFound;
 import com.zensar.service.AdvertiseService;
 
 @RestController
 public class AdvertiseController {
+	
+	
 	@Autowired
 	private AdvertiseService advertiseService;
 
@@ -30,7 +33,7 @@ public class AdvertiseController {
 	}
 	
 	@PutMapping("/advertise/{id}")
-	public AdvertiseDetailsDto updateAdvertise(@PathVariable int id, @RequestBody AdvertiseDetailsDto info) {
+	public AdvertiseDetailsDto updateAdvertise(@PathVariable int id, @RequestBody AdvertiseDetailsDto info) throws UserNotFound {
 		return advertiseService.updateAdvertise(id, info);
 	}
 	
@@ -40,13 +43,13 @@ public class AdvertiseController {
 	}
 	
 	@GetMapping("/user/advertise/{postId}")
-	public AdvertiseDetailsDto getAdvertiseById(@PathVariable int postId){
+	public AdvertiseDetailsDto getAdvertiseById(@PathVariable int postId) throws UserNotFound{
 		return advertiseService.getAdvertiseById(postId);
 	}
 	
 	@DeleteMapping("/user/advertise/{postId}")
-	public boolean deleteAdvertise(@PathVariable int postId) {
-		return advertiseService.deleteAdvertise(postId);
+	public boolean deleteAdvertiseById(@PathVariable int postId) throws UserNotFound {
+		return advertiseService.deleteAdvertiseById(postId);
 	}
 	
 	@GetMapping("/advertise/search/filtercriteria")
@@ -60,7 +63,7 @@ public class AdvertiseController {
 	}
 	
 	@GetMapping("/advertise/{postId}")
-	public AdvertiseDetailsDto getAdvertise(@PathVariable int postId){
+	public AdvertiseDetailsDto getAdvertise(@PathVariable int postId) throws UserNotFound{
 		return advertiseService.getAdvertise(postId);
 	}
 }
