@@ -42,9 +42,13 @@ public class App {
 				
 				
 			case 2:
+				try {
 				List<Product> list=service.getAllProductsRowMapper();
 				for(Product p:list) {
 					System.out.println(p);
+				}
+				}catch(Exception e) {
+					System.out.println("table not found");
 				}
 				break;
 
